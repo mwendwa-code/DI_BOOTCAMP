@@ -1,0 +1,20 @@
+print("CHALLENGE 1: Multiples of a number")
+number = int(input("Enter a number: "))
+length = int(input("Enter the list length: "))
+
+multiples = []
+for multiplier in range(1, length + 1):
+	multiples.append(number * multiplier)
+
+print("Multiples:", multiples)
+
+
+print("\nCHALLENGE 2: Remove consecutive duplicate letters")
+word = input("Enter a word: ")
+
+without_duplicates = ""
+for character in word:
+	if not without_duplicates or character != without_duplicates[-1]:
+		without_duplicates += character
+
+print("Modified word:", without_duplicates)

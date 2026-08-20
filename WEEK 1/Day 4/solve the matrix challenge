@@ -1,0 +1,36 @@
+MATRIX_STR = """
+7ir
+Tsi
+h%x
+i ?
+sM# 
+$a 
+#t%"""
+
+# Turn the text into a list of rows.
+rows = MATRIX_STR.strip("\n").split("\n")
+
+matrix = []
+for row in rows:
+	matrix.append(list(row))
+
+number_of_columns = max(len(row) for row in matrix)
+column_text = ""
+
+for column_index in range(number_of_columns):
+	for row in matrix:
+		if column_index < len(row):
+			column_text += row[column_index]
+
+decoded_message = ""
+symbols_between_letters = False
+for character in column_text:
+	if character.isalpha():
+		if symbols_between_letters and decoded_message:
+			decoded_message += " "
+		decoded_message += character
+		symbols_between_letters = False
+	elif decoded_message:
+		symbols_between_letters = True
+
+print(decoded_message)

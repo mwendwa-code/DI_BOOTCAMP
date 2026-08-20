@@ -1,0 +1,9 @@
+text = input("String: ")
+character = input("Character: ")
+
+occurrences = 0
+for letter in text:
+	if letter == character:
+		occurrences += 1
+
+print(occurrences)

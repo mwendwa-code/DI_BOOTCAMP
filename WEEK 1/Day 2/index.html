@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Exercises in the Browser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="page-shell">
+        <header class="intro">
+            <p class="kicker">WEEK 1 / DAY 2 / NINJA</p>
+            <h1>Python exercises,<br><span>made visible.</span></h1>
+            <p class="intro-copy">A browser version of the calculator, list analysis, paragraph analysis, and word-frequency exercises.</p>
+        </header>
+        <section class="control-panel" aria-labelledby="calculator-title">
+            <div class="panel-heading"><span class="exercise-tag">01</span><div><p class="kicker">Formula calculator</p><h2 id="calculator-title">Calculate Q</h2></div></div>
+            <p class="formula">Q = sqrt((2 x C x D) / H)</p>
+            <div class="form-row">
+                <label>C<input id="constant-c" type="number" value="50"></label>
+                <label>H<input id="constant-h" type="number" value="30"></label>
+                <label class="wide-label">D values<input id="d-values" type="text" value="10, 20, 30" placeholder="10, 20, 30"></label>
+                <button class="primary-button" id="calculate-button" type="button">Calculate <span aria-hidden="true">&#8594;</span></button>
+            </div>
+            <output class="result-line" id="calculator-result" aria-live="polite">Results will appear here.</output>
+        </section>
+        <section class="results-grid" aria-label="Exercise results">
+            <article class="result-card"><div class="panel-heading"><span class="exercise-tag">02</span><div><p class="kicker">List analysis</p><h2>Numbers</h2></div></div><div id="list-result"></div></article>
+            <article class="result-card"><div class="panel-heading"><span class="exercise-tag">03</span><div><p class="kicker">Paragraph analysis</p><h2>AI text</h2></div></div><div id="paragraph-result"></div></article>
+        </section>
+        <section class="control-panel frequency-panel" aria-labelledby="frequency-title">
+            <div class="panel-heading"><span class="exercise-tag">04</span><div><p class="kicker">Word frequency</p><h2 id="frequency-title">Count the words</h2></div></div>
+            <label class="text-label" for="frequency-text">Text to analyze</label>
+            <textarea id="frequency-text" rows="3" placeholder="Enter a sentence or paragraph..."></textarea>
+            <button class="primary-button" id="frequency-button" type="button">Analyze text <span aria-hidden="true">&#8594;</span></button>
+            <output class="frequency-result" id="frequency-result" aria-live="polite">Word counts will appear here.</output>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
