@@ -1,4 +1,6 @@
-manufacturers_string = "Volkswagen, Toyota, Ford Motor, Honda, Chevrolet"
+manufacturers_string = "Volkswagen, AMG" \
+", BMW" \
+", Honda, Chevrolet"
 manufacturers = manufacturers_string.split(", ")
 
 print(f"There are {len(manufacturers)} manufacturers in the list.")
@@ -13,11 +15,11 @@ print(f"Manufacturers without the letter 'i': {len(without_letter_i)}")
 duplicate_manufacturers = [
 	"Honda",
 	"Volkswagen",
-	"Toyota",
-	"Ford Motor",
+	"AMG",
+	"BMW",
 	"Honda",
 	"Chevrolet",
-	"Toyota",
+	"AUDI",
 ]
 
 unique_manufacturers = list(dict.fromkeys(duplicate_manufacturers))

@@ -58,3 +58,4 @@ while True:
 	if len(sentence) > len(longest_sentence):
 		longest_sentence = sentence
 		print("Congratulations! You set a new longest sentence!")
+
