@@ -114,6 +114,5 @@ if __name__ == "__main__":
 	account.authenticate("sara", "secret")
 	account.deposit(50)
 	account.withdraw(25)
-	print(f"Account balance: {account.balance}")
 
 #
