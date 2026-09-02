@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise Ninja</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        line-height: 1.6;
+      }
+
+      section {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      label {
+        display: block;
+        margin-top: 0.5rem;
+      }
+
+      input, button {
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      #totalTip {
+        display: none;
+        margin-top: 1rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h2>Exercise 1: Calculate the tip</h2>
+      <label for="billAmt">Bill Amount</label>
+      <input type="number" id="billAmt" step="0.01" />
+
+      <label for="serviceQual">Service Quality</label>
+      <input type="number" id="serviceQual" step="0.1" min="0" max="5" />
+
+      <label for="numOfPeople">Number of People</label>
+      <input type="number" id="numOfPeople" min="1" />
+
+      <button id="calculate" type="button">Calculate</button>
+
+      <div id="totalTip">
+        <span>Total tip: </span>
+        <span id="tip"></span>
+        <span id="each"> each</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Exercise 2: Validate the email</h2>
+      <form id="emailForm">
+        <label for="emailInput">Email</label>
+        <input type="email" id="emailInput" placeholder="example@email.com" required />
+        <button type="submit">Validate</button>
+      </form>
+      <p id="emailResult"></p>
+    </section>
+
+    <section>
+      <h2>Exercise 3: Get the user's geolocation coordinates</h2>
+      <button id="getLocation" type="button">Get My Location</button>
+      <p id="geoResult"></p>
+    </section>
+
+    <script src="main.js"></script>
+  </body>
+</html>

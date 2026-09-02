@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 6 - Change the navbar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        #navBar, #socialNetworkNavigation {
+            background-color: #333;
+            padding: 10px;
+        }
+        #navBar ul, #socialNetworkNavigation ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+        #navBar li, #socialNetworkNavigation li {
+            padding: 0;
+        }
+        #navBar a, #socialNetworkNavigation a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+        }
+        #navBar a:hover, #socialNetworkNavigation a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="navBar">
+        <ul>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">My Friends</a></li>
+            <li><a href="#">Messenger</a></li>
+            <li><a href="#">My Pics</a></li>
+        </ul>
+    </div>
+
+    <script src="exercise6.js"></script>
+</body>
+</html>
