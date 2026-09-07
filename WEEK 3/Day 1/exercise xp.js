@@ -1,41 +1,50 @@
-// ---------------------------
+// =========================================
 // Exercise 1: List of people
-// ---------------------------
+// =========================================
+
 const people = ["Greg", "Mary", "Devon", "James"];
+
+// Part I - Review about arrays
 
 // 1. Remove "Greg"
 people.shift();
+console.log("After removing Greg:", people);
 
 // 2. Replace "James" with "Jason"
 const jamesIndex = people.indexOf("James");
 if (jamesIndex !== -1) {
   people[jamesIndex] = "Jason";
 }
+console.log("After replacing James:", people);
 
 // 3. Add your name to the end of the array
 people.push("YourName");
+console.log("After adding name:", people);
 
 // 4. Console.log Mary's index
-console.log("Mary index:", people.indexOf("Mary"));
+console.log("Mary's index:", people.indexOf("Mary"));
 
 // 5. Copy the array without "Mary" and without your name
 const peopleCopy = people.slice(1, 3);
-console.log("People copy:", peopleCopy);
+console.log("Copy without Mary and YourName:", peopleCopy);
 
 // 6. Index of "Foo"
-console.log("Foo index:", people.indexOf("Foo"));
-// It returns -1 because "Foo" is not present in the array.
+console.log("Foo's index:", people.indexOf("Foo"));
+// Returns -1 because "Foo" is not in the array
 
 // 7. Last element of the array
 const last = people[people.length - 1];
 console.log("Last person:", last);
 
 // Part II - Loops
-console.log("Loop through people:");
+
+// 1. Iterate through array and console.log each person
+console.log("All people:");
 for (let i = 0; i < people.length; i++) {
   console.log(people[i]);
 }
 
+// 2. Iterate and exit after "Devon"
 console.log("Stop after Devon:");
 for (let i = 0; i < people.length; i++) {
   console.log(people[i]);
@@ -44,43 +53,51 @@ for (let i = 0; i < people.length; i++) {
   }
 }
 
-// ---------------------------
+// =========================================
 // Exercise 2: Your favorite colors
-// ---------------------------
+// =========================================
+
 const colors = ["blue", "red", "green", "yellow", "purple"];
 
-console.log("My favorite colors:");
+// 1-2. Loop and console.log with position
+console.log("\nMy favorite colors:");
 for (let i = 0; i < colors.length; i++) {
   console.log(`My #${i + 1} choice is ${colors[i]}`);
 }
 
-const suffixes = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"];
-console.log("Bonus:");
+// 3. Bonus: With proper suffix (1st, 2nd, 3rd, 4th, 5th)
+const suffixes = ["st", "nd", "rd", "th", "th"];
+console.log("\nWith proper suffixes:");
 for (let i = 0; i < colors.length; i++) {
   const number = i + 1;
-  const suffix = suffixes[number % 10] || "th";
+  const suffix = i < suffixes.length ? suffixes[i] : "th";
   console.log(`My ${number}${suffix} choice is ${colors[i]}`);
 }
 
-// ---------------------------
+// =========================================
 // Exercise 3: Repeat the question
-// ---------------------------
-const askForNumber = () => {
-  if (typeof prompt === "function") {
-    return Number(prompt("Please enter a number greater than or equal to 10:"));
+// =========================================
+
+function askForNumber() {
+  let userNumber;
+  while (true) {
+    userNumber = Number(prompt("Please enter a number greater than or equal to 10:"));
+    if (!isNaN(userNumber) && userNumber >= 10) {
+      break;
+    }
+    alert("Invalid input. Please enter a number >= 10");
   }
-  return 12;
-};
-
-let userNumber = askForNumber();
-while (Number.isNaN(userNumber) || userNumber < 10) {
-  userNumber = askForNumber();
+  return userNumber;
 }
-console.log("Final number:", userNumber);
 
-// ---------------------------
+// Uncomment to test:
+// const userNum = askForNumber();
+// console.log("You entered:", userNum);
+
+// =========================================
 // Exercise 4: Building Management
-// ---------------------------
+// =========================================
+
 const building = {
   numberOfFloors: 4,
   numberOfAptByFloor: {
@@ -97,26 +114,34 @@ const building = {
   },
 };
 
-console.log("Number of floors:", building.numberOfFloors);
-console.log(
-  "Apartments on floors 1 and 3:",
-  building.numberOfAptByFloor.firstFloor + building.numberOfAptByFloor.thirdFloor
-);
-console.log(
-  "Second tenant:",
-  building.nameOfTenants[1],
-  "Rooms:",
-  building.numberOfRoomsAndRent.dan[0]
-);
+// 1. Already copied above
 
-if (building.numberOfRoomsAndRent.sarah[1] + building.numberOfRoomsAndRent.david[1] > building.numberOfRoomsAndRent.dan[1]) {
+// 2. Number of floors
+console.log("\nNumber of floors:", building.numberOfFloors);
+
+// 3. Apartments on floors 1 and 3
+const floorsOneAndThree =
+  building.numberOfAptByFloor.firstFloor +
+  building.numberOfAptByFloor.thirdFloor;
+console.log("Apartments on floors 1 and 3:", floorsOneAndThree);
+
+// 4. Second tenant and number of rooms
+console.log("Second tenant:", building.nameOfTenants[1]);
+console.log("Dan's rooms:", building.numberOfRoomsAndRent.dan[0]);
+
+// 5. Check if Sarah + David rent > Dan's rent, if yes increase Dan's to 1200
+const sarahAndDavidRent =
+  building.numberOfRoomsAndRent.sarah[1] +
+  building.numberOfRoomsAndRent.david[1];
+if (sarahAndDavidRent > building.numberOfRoomsAndRent.dan[1]) {
   building.numberOfRoomsAndRent.dan[1] = 1200;
 }
-console.log("Updated Dan rent:", building.numberOfRoomsAndRent.dan[1]);
+console.log("Dan's new rent:", building.numberOfRoomsAndRent.dan[1]);
 
-// ---------------------------
+// =========================================
 // Exercise 5: Family
-// ---------------------------
+// =========================================
+
 const family = {
   mother: "Alice",
   father: "Bob",
@@ -124,38 +149,50 @@ const family = {
   sister: "Dana",
 };
 
-console.log("Family keys:");
+// 1-2. Console.log keys using for...in
+console.log("\nFamily keys:");
 for (const key in family) {
   console.log(key);
 }
 
-console.log("Family values:");
+// 3. Console.log values using for...in
+console.log("\nFamily values:");
 for (const key in family) {
   console.log(family[key]);
 }
 
-// ---------------------------
+// =========================================
 // Exercise 6: Rudolf
-// ---------------------------
+// =========================================
+
 const details = {
   my: "name",
   is: "Rudolf",
   the: "reindeer",
 };
 
-const keys = Object.keys(details);
+// Build the sentence using a for loop
 let sentence = "";
+const keys = Object.keys(details);
 for (let i = 0; i < keys.length; i++) {
   const key = keys[i];
-  sentence += (i === 0 ? "" : " ") + key + " " + details[key];
+  const value = details[key];
+  sentence += key + " " + value;
+  if (i < keys.length - 1) {
+    sentence += " ";
+  }
 }
-console.log(sentence);
+console.log("\nRudolf sentence:", sentence);
 
-// ---------------------------
+// =========================================
 // Exercise 7: Secret Group
-// ---------------------------
+// =========================================
+
 const names = ["Jack", "Philip", "Sarah", "Amanda", "Bernard", "Kyle"];
 
-const sortedNames = [...names].sort();
-const secretSociety = sortedNames.map((name) => name[0]).join("");
-console.log("Secret society:", secretSociety);
+// Get first letter of each name, sort alphabetically, and join
+const firstLetters = names.map((name) => name[0]);
+const sortedLetters = firstLetters.sort();
+const secretSociety = sortedLetters.join("");
+
+console.log("\nSecret society name:", secretSociety);
