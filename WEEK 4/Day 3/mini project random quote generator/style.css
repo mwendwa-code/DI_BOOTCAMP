@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 40px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+#quoteSection {
+    background: #222;
+    border-radius: 15px;
+    padding: 40px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+#quote {
+    font-size: 28px;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+#author {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 12px 18px;
+    margin: 8px;
+    background: white;
+    color: #111;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #ccc;
+    transform: translateY(-2px);
+}
+
+#generateBtn {
+    display: block;
+    margin: 25px auto;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+#stats {
+    background: #1b1b1b;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#stats p {
+    margin: 8px;
+}
+
+.form-section {
+    background: #222;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+form button {
+    margin: 5px 0 0;
+    font-weight: bold;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#filterResult {
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-top: 20px;
+    padding: 20px;
+    background: #111;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    #quote {
+        font-size: 22px;
+    }
+
+    #quoteSection {
+        padding: 25px;
+    }
+
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .navigation {
+        flex-direction: column;
+    }
+}
+

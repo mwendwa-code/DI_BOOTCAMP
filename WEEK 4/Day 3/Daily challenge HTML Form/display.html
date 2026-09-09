@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Submitted Information</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+        }
+
+        section {
+            width: 450px;
+            padding: 35px;
+            background: #222;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 20px;
+            margin: 15px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: white;
+            color: #111;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        a:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="result">
+
+        <h1>Submitted Information</h1>
+
+    </section>
+
+
+    <script>
+
+        // Get the information from the URL
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const name = urlParams.get("name");
+        const lastname = urlParams.get("lastname");
+
+
+        // Get the section from the DOM
+
+        const section = document.getElementById("result");
+
+
+        // Create and display the name
+
+        const nameParagraph = document.createElement("p");
+
+        nameParagraph.innerHTML =
+            `Name: <span>${name}</span>`;
+
+        section.appendChild(nameParagraph);
+
+
+        // Create and display the lastname
+
+        const lastnameParagraph = document.createElement("p");
+
+        lastnameParagraph.innerHTML =
+            `Lastname: <span>${lastname}</span>`;
+
+        section.appendChild(lastnameParagraph);
+
+
+        // Create a link back to the form
+
+        const backLink = document.createElement("a");
+
+        backLink.href = "index.html";
+
+        backLink.textContent = "Go Back";
+
+        section.appendChild(backLink);
+
+    </script>
+
+</body>
+</html>
+```

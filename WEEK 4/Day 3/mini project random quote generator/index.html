@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>Random Quote Generator</h1>
+
+        <!-- Random quote section -->
+        <section id="quoteSection">
+
+            <p id="quote">
+                Click the button to generate a quote.
+            </p>
+
+            <h3 id="author"></h3>
+
+        </section>
+
+        <!-- Generate button -->
+        <button id="generateBtn">Generate Quote</button>
+
+
+        <!-- Quote information buttons -->
+        <div class="buttons">
+
+            <button id="charactersBtn">
+                Characters
+            </button>
+
+            <button id="charactersNoSpacesBtn">
+                Characters Without Spaces
+            </button>
+
+            <button id="wordsBtn">
+                Words
+            </button>
+
+            <button id="likeBtn">
+                ❤️ Like
+            </button>
+
+        </div>
+
+
+        <!-- Statistics -->
+        <div id="stats">
+
+            <p id="charactersResult"></p>
+            <p id="charactersNoSpacesResult"></p>
+            <p id="wordsResult"></p>
+            <p id="likesResult"></p>
+
+        </div>
+
+
+        <!-- Add a new quote -->
+        <section class="form-section">
+
+            <h2>Add Your Own Quote</h2>
+
+            <form id="addQuoteForm">
+
+                <input
+                    type="text"
+                    id="newQuote"
+                    placeholder="Enter a quote"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="newAuthor"
+                    placeholder="Enter author"
+                    required
+                >
+
+                <button type="submit">
+                    Add Quote
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Filter quotes by author -->
+        <section class="form-section">
+
+            <h2>Find Quotes By Author</h2>
+
+            <form id="filterForm">
+
+                <input
+                    type="text"
+                    id="authorSearch"
+                    placeholder="Enter author name"
+                    required
+                >
+
+                <button type="submit">
+                    Find Quote
+                </button>
+
+            </form>
+
+            <div class="navigation">
+
+                <button id="previousBtn">
+                    ← Previous
+                </button>
+
+                <button id="nextBtn">
+                    Next →
+                </button>
+
+            </div>
+
+            <p id="filterResult"></p>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
