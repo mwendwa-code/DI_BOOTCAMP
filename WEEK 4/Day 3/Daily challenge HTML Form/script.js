@@ -1,4 +1,3 @@
-```javascript
 // Get the form
 const form = document.getElementById("userForm");
 
@@ -27,4 +26,3 @@ form.addEventListener("submit", function (event) {
     // Display the JSON string in the DOM
     output.textContent = jsonString;
 });
-```
