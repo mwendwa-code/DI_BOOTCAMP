@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Random Giphy GIF</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 250px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 18px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #searchBtn {
+            background: #00d9ff;
+        }
+
+        #deleteAllBtn {
+            background: #e63946;
+            color: white;
+        }
+
+        #gifContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gif-card {
+            background: #222;
+            padding: 15px;
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        .gif-card img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .deleteBtn {
+            display: block;
+            width: 100%;
+            margin: 12px 0 0;
+            background: #ff4444;
+            color: white;
+        }
+
+        .deleteBtn:hover,
+        #deleteAllBtn:hover {
+            background: #c82333;
+        }
+
+        #searchBtn:hover {
+            background: #00b8d9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎬 Random Giphy GIF</h1>
+
+    <form id="gifForm">
+        <input
+            type="text"
+            id="category"
+            placeholder="Enter a category..."
+            required
+        >
+
+        <button type="submit" id="searchBtn">
+            Get GIF
+        </button>
+
+        <button type="button" id="deleteAllBtn">
+            DELETE ALL
+        </button>
+    </form>
+
+    <div id="gifContainer"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
