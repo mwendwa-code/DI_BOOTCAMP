@@ -32,7 +32,6 @@ WHERE ft.id NOT IN (
     WHERE id IS NULL
 );
 
--- Expected output: 0
 
 -- Q2
 SELECT COUNT(*)
@@ -43,7 +42,6 @@ WHERE ft.id NOT IN (
     WHERE id = 5
 );
 
--- Expected output: 2
 
 -- Q3
 SELECT COUNT(*)
@@ -53,7 +51,6 @@ WHERE ft.id NOT IN (
     FROM SecondTab
 );
 
--- Expected output: 0
 
 -- Q4
 SELECT COUNT(*)
@@ -64,4 +61,3 @@ WHERE ft.id NOT IN (
     WHERE id IS NOT NULL
 );
 
--- Expected output: 2
