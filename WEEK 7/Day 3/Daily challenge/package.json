@@ -1,0 +1,22 @@
+{
+  "name": "user-management-api",
+  "version": "1.0.0",
+  "description": "User management API with registration, login, and JSON storage",
+  "main": "Task api 2.js",
+  "scripts": {
+    "start": "node \"Task api 2.js\""
+  },
+  "keywords": [
+    "express",
+    "bcrypt",
+    "users",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^5.1.0"
+  }
+}

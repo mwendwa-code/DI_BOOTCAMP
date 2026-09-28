@@ -1,0 +1,21 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "Simple command-line notes app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "notes",
+    "cli",
+    "yargs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "lodash": "^4.17.26",
+    "yargs": "^17.0.1"
+  }
+}

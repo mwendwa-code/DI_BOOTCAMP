@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      form {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        width: 380px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+      }
+      input {
+        display: block;
+        width: 100%;
+        margin: 10px 0 16px;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #16a34a;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:disabled {
+        background: #86efac;
+        cursor: not-allowed;
+      }
+      .link {
+        text-align: center;
+        margin-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="registerForm">
+      <h2>Register</h2>
+      <label for="firstName">Name</label>
+      <input id="firstName" name="firstName" type="text" required />
+
+      <label for="lastName">Last Name</label>
+      <input id="lastName" name="lastName" type="text" required />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required />
+
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required />
+
+      <button id="registerBtn" type="submit" disabled>Register</button>
+      <div class="link"><a href="/login.html">Already have an account?</a></div>
+    </form>
+
+    <script>
+      const fields = [
+        document.getElementById('firstName'),
+        document.getElementById('lastName'),
+        document.getElementById('email'),
+        document.getElementById('username'),
+        document.getElementById('password')
+      ];
+      const registerBtn = document.getElementById('registerBtn');
+
+      function validateForm() {
+        registerBtn.disabled = fields.some((field) => !field.value.trim());
+      }
+
+      fields.forEach((field) => field.addEventListener('input', validateForm));
+
+      document.getElementById('registerForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const payload = {
+          name: document.getElementById('firstName').value.trim(),
+          lastName: document.getElementById('lastName').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          username: document.getElementById('username').value.trim(),
+          password: document.getElementById('password').value.trim()
+        };
+
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        alert(result.message || 'Registration result');
+      });
+    </script>
+  </body>
+</html>

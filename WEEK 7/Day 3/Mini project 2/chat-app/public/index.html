@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-Time Chat Room</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1d3557, #457b9d);
+        color: #f1faee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .chat-app {
+        width: min(900px, 95vw);
+        background: rgba(11, 18, 32, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      }
+
+      .header {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .header h1 {
+        margin: 0;
+      }
+
+      .login-panel {
+        display: flex;
+        gap: 10px;
+        padding: 20px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .login-panel input,
+      .login-panel button,
+      .login-panel select,
+      #messageInput,
+      #sendBtn {
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .login-panel input,
+      .login-panel select,
+      #messageInput {
+        background: #f1faee;
+        color: #1d3557;
+      }
+
+      .login-panel button,
+      #sendBtn {
+        background: #e63946;
+        color: white;
+        cursor: pointer;
+      }
+
+      .chat-layout {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        min-height: 480px;
+      }
+
+      .sidebar {
+        background: rgba(13, 28, 43, 0.95);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 20px;
+      }
+
+      .sidebar h3 {
+        margin-top: 0;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .main {
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      #messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .message {
+        max-width: 75%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        line-height: 1.4;
+      }
+
+      .message.self {
+        align-self: flex-end;
+        background: #457b9d;
+      }
+
+      .message.system {
+        align-self: center;
+        background: rgba(230, 57, 70, 0.5);
+        font-size: 0.9rem;
+      }
+
+      .message small {
+        display: block;
+        opacity: 0.8;
+        margin-bottom: 4px;
+      }
+
+      .composer {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 15px 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      #messageInput {
+        flex: 1;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @media (max-width: 700px) {
+        .chat-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          border-right: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-app">
+      <div class="header">
+        <h1>Chat Room</h1>
+      </div>
+
+      <div class="login-panel">
+        <input id="usernameInput" type="text" placeholder="Your name" maxlength="20" />
+        <select id="roomSelect">
+          <option value="general">General</option>
+          <option value="javascript">JavaScript</option>
+          <option value="design">Design</option>
+        </select>
+        <button id="joinBtn">Join Room</button>
+        <button id="leaveBtn" class="hidden">Leave Room</button>
+      </div>
+
+      <div class="chat-layout">
+        <aside class="sidebar">
+          <h3>Active Users</h3>
+          <ul id="usersList"></ul>
+        </aside>
+
+        <main class="main">
+          <div id="messages"></div>
+          <div class="composer">
+            <input id="messageInput" type="text" placeholder="Type a message..." maxlength="300" />
+            <button id="sendBtn">Send</button>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const usernameInput = document.getElementById('usernameInput');
+      const roomSelect = document.getElementById('roomSelect');
+      const joinBtn = document.getElementById('joinBtn');
+      const leaveBtn = document.getElementById('leaveBtn');
+      const messageInput = document.getElementById('messageInput');
+      const sendBtn = document.getElementById('sendBtn');
+      const messages = document.getElementById('messages');
+      const usersList = document.getElementById('usersList');
+
+      let currentRoom = null;
+      let currentUser = '';
+
+      function appendMessage(text, sender = '', isSelf = false, isSystem = false) {
+        const item = document.createElement('div');
+        item.className = `message ${isSelf ? 'self' : ''} ${isSystem ? 'system' : ''}`;
+
+        if (!isSystem) {
+          const meta = document.createElement('small');
+          meta.textContent = sender || 'Anonymous';
+          item.appendChild(meta);
+        }
+
+        const body = document.createElement('div');
+        body.textContent = text;
+        item.appendChild(body);
+        messages.appendChild(item);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function renderUsers(users) {
+        usersList.innerHTML = '';
+        users.forEach((user) => {
+          const li = document.createElement('li');
+          li.textContent = user;
+          usersList.appendChild(li);
+        });
+      }
+
+      function joinRoom() {
+        const username = usernameInput.value.trim();
+        const room = roomSelect.value;
+
+        if (!username) {
+          alert('Please enter a username first.');
+          return;
+        }
+
+        if (currentRoom) {
+          socket.emit('leave_room');
+        }
+
+        currentUser = username;
+        currentRoom = room;
+
+        socket.emit('join_room', { username, room });
+        joinBtn.classList.add('hidden');
+        leaveBtn.classList.remove('hidden');
+        messageInput.focus();
+      }
+
+      function leaveRoom() {
+        if (!currentRoom) return;
+        socket.emit('leave_room');
+        currentRoom = null;
+        currentUser = '';
+        joinBtn.classList.remove('hidden');
+        leaveBtn.classList.add('hidden');
+        messages.innerHTML = '';
+        renderUsers([]);
+      }
+
+      joinBtn.addEventListener('click', joinRoom);
+      leaveBtn.addEventListener('click', leaveRoom);
+
+      sendBtn.addEventListener('click', () => {
+        const text = messageInput.value.trim();
+        if (!text || !currentRoom) return;
+
+        socket.emit('send_message', {
+          room: currentRoom,
+          message: text,
+          username: currentUser
+        });
+
+        messageInput.value = '';
+      });
+
+      messageInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          sendBtn.click();
+        }
+      });
+
+      socket.on('welcome_message', (message) => {
+        appendMessage(message, '', false, true);
+      });
+
+      socket.on('system_message', (message) => {
+        appendMessage(message, '', false, true);
+      });
+
+      socket.on('room_users', (users) => {
+        renderUsers(users);
+      });
+
+      socket.on('receive_message', ({ username, message, time }) => {
+        const isSelf = username === currentUser;
+        appendMessage(message, `${username} • ${time}`, isSelf, false);
+      });
+    </script>
+  </body>
+</html>

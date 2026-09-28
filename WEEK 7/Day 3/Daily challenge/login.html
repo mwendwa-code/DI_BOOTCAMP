@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      form {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        width: 320px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+      }
+      input {
+        display: block;
+        width: 100%;
+        margin: 10px 0 16px;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+      .link {
+        text-align: center;
+        margin-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="loginForm">
+      <h2>Login</h2>
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required />
+
+      <button id="loginBtn" type="submit" disabled>Login</button>
+      <div class="link"><a href="/register.html">Create an account</a></div>
+    </form>
+
+    <script>
+      const username = document.getElementById('username');
+      const password = document.getElementById('password');
+      const loginBtn = document.getElementById('loginBtn');
+
+      function validateLogin() {
+        loginBtn.disabled = !(username.value.trim() && password.value.trim());
+      }
+
+      username.addEventListener('input', validateLogin);
+      password.addEventListener('input', validateLogin);
+
+      document.getElementById('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const payload = {
+          username: username.value.trim(),
+          password: password.value.trim()
+        };
+
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        alert(result.message || 'Login result');
+      });
+    </script>
+  </body>
+</html>
