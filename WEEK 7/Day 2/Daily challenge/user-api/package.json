@@ -1,0 +1,14 @@
+{
+  "name": "user-management-api",
+  "version": "1.0.0",
+  "description": "User management API with registration and login",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.2"
+  }
+}

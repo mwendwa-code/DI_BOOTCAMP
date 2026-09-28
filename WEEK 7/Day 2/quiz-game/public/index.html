@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Game</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .quiz-box {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        width: 480px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      button {
+        padding: 10px 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #3b82f6;
+        color: white;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background: #2563eb;
+      }
+
+      .feedback {
+        margin-top: 12px;
+        font-weight: bold;
+      }
+
+      .score {
+        margin-top: 18px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quiz-box">
+      <h1>Quiz Time</h1>
+      <div id="quiz-content"></div>
+    </div>
+
+    <script>
+      const state = {
+        currentIndex: 0,
+        score: 0,
+        questions: []
+      };
+
+      async function loadQuestion(index) {
+        const response = await fetch(`/api/quiz/${index + 1}`);
+        const question = await response.json();
+        const container = document.getElementById('quiz-content');
+
+        container.innerHTML = `
+          <p>Question ${index + 1}</p>
+          <h2>${question.question}</h2>
+          <div class="options">
+            ${question.options
+              .map(
+                (option) => `
+                  <button type="button" data-option="${option.option}">
+                    ${option.option}
+                  </button>
+                `
+              )
+              .join('')}
+          </div>
+          <div id="feedback" class="feedback"></div>
+        `;
+
+        container.querySelectorAll('button').forEach((button) => {
+          button.addEventListener('click', async () => {
+            const selected = button.dataset.option;
+            const res = await fetch('/api/quiz/answer', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ questionId: question.id, answer: selected })
+            });
+
+            const result = await res.json();
+            const feedback = document.getElementById('feedback');
+
+            if (result.correct) {
+              state.score += 1;
+              feedback.textContent = 'Correct!';
+              feedback.style.color = 'green';
+            } else {
+              feedback.textContent = `Wrong! The correct answer is ${result.correctAnswer}.`;
+              feedback.style.color = 'red';
+            }
+
+            setTimeout(() => {
+              state.currentIndex += 1;
+              if (state.currentIndex < state.questions.length) {
+                loadQuestion(state.currentIndex);
+              } else {
+                document.getElementById('quiz-content').innerHTML = `
+                  <h2>Quiz complete!</h2>
+                  <div class="score">Your final score: ${state.score} / ${state.questions.length}</div>
+                `;
+              }
+            }, 1200);
+          });
+        });
+      }
+
+      async function initQuiz() {
+        const response = await fetch('/api/quiz/1');
+        const firstQuestion = await response.json();
+        state.questions = [firstQuestion];
+        if (firstQuestion && firstQuestion.id) {
+          state.questions = [
+            { id: 1, question: 'Which planet is known as the Red Planet?', options: [{ option: 'Mars' }, { option: 'Venus' }, { option: 'Jupiter' }] },
+            { id: 2, question: 'What is the capital of France?', options: [{ option: 'Paris' }, { option: 'Rome' }, { option: 'Berlin' }] },
+            { id: 3, question: 'Which language runs on the web browser?', options: [{ option: 'JavaScript' }, { option: 'Python' }, { option: 'C++' }] }
+          ];
+        }
+        loadQuestion(0);
+      }
+
+      initQuiz();
+    </script>
+  </body>
+</html>
