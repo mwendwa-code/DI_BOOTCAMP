@@ -1,0 +1,1 @@
+export { default } from '../Daily challenge/React carousel.js';
