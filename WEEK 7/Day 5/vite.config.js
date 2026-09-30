@@ -5,12 +5,12 @@ export default defineConfig({
   plugins: [react()],
   esbuild: {
     loader: 'jsx',
-    include: /(?:src\/.*\.[jt]sx?|Exercise xp gold\.js|Exercise xp gold 2\/React and forms\.js|Exercise xp ninja\.js|Daily challenge\/Voting app\.js)$/,
+    include: /(?:src\/.*\.[jt]sx?|Exercise xp\.JS|Exercise xp gold\.js|Exercise xp gold 2\/React and forms\.js|Exercise xp ninja\.js|Daily challenge\/Voting app\.js)$/,
     exclude: []
   },
   optimizeDeps: {
     esbuildOptions: {
-      loader: { '.js': 'jsx' }
+      loader: { '.js': 'jsx', '.JS': 'jsx' }
     }
   }
 });
