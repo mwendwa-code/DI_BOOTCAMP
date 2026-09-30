@@ -1,0 +1,45 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/header') %>
+<main class="container page-wrap py-5">
+  <p class="text-uppercase fw-semibold text-secondary small mb-2">Browse the feed</p>
+  <h1 class="page-title display-5 mb-4">Search facts</h1>
+
+  <div class="search-panel pb-4 mb-4">
+    <div class="row g-4">
+      <div class="col-12 col-lg-6">
+        <form action="/search/title" method="post">
+          <label class="form-label fw-semibold" for="search-title">Search by title</label>
+          <div class="input-group">
+            <input class="form-control" id="search-title" list="feed-titles" name="title" placeholder="Enter a title" value="<%= searchTitle %>">
+            <datalist id="feed-titles">
+              <% titles.forEach((titleOption) => { %>
+                <option value="<%= titleOption %>"></option>
+              <% }) %>
+            </datalist>
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 col-lg-6">
+        <form action="/search/category" method="post">
+          <label class="form-label fw-semibold" for="search-category">Search by category</label>
+          <div class="input-group">
+            <select class="form-select" id="search-category" name="category">
+              <option value="">Choose a category</option>
+              <% categories.forEach((category) => { %>
+                <option value="<%= category %>" <%= category === searchCategory ? 'selected' : '' %>><%= category %></option>
+              <% }) %>
+            </select>
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <% if (notice) { %>
+    <p class="alert alert-secondary" role="status"><%= notice %></p>
+  <% } %>
+  <%- include('../partials/posts', { posts }) %>
+</main>
+<%- include('../partials/footer') %>

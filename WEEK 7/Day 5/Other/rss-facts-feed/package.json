@@ -1,0 +1,23 @@
+{
+  "name": "rss-facts-feed",
+  "version": "1.0.0",
+  "description": "An Express and EJS interface for The Fact File RSS feed",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "feed:check": "node feed-check.js",
+    "test": "node server-check.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.20.0",
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "rss-parser": "^3.13.0"
+  }
+}

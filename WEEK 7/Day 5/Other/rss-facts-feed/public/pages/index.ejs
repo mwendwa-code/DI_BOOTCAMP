@@ -1,0 +1,9 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/header') %>
+<main class="container page-wrap py-5">
+  <p class="text-uppercase fw-semibold text-secondary small mb-2">The latest from</p>
+  <h1 class="page-title display-5 mb-2"><%= feedTitle %></h1>
+  <p class="text-secondary mb-4">Interesting facts, gathered from the RSS feed.</p>
+  <%- include('../partials/posts', { posts }) %>
+</main>
+<%- include('../partials/footer') %>
