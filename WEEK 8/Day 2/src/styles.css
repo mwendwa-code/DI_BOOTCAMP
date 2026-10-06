@@ -1,0 +1,59 @@
+body {
+  background: #f8f9fa;
+  color: #212529;
+}
+
+.app-content {
+  max-width: 960px;
+}
+
+.exercise-section {
+  margin-top: 2.5rem;
+}
+
+.exercise-section h2 {
+  margin-bottom: 1rem;
+}
+
+.post-list article + article,
+.experience-list article + article {
+  margin-top: 1.25rem;
+}
+
+.active-nav-link {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.autocomplete {
+  position: relative;
+  max-width: 32rem;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  right: 0;
+  left: 0;
+  max-height: 18rem;
+  overflow-y: auto;
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.autocomplete-option {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  background: #fff;
+  color: inherit;
+  text-align: left;
+}
+
+.autocomplete-option:hover,
+.autocomplete-option:focus-visible {
+  background: #e9ecef;
+}
