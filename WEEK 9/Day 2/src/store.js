@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import todosReducer from '../Exercise xp.js';
+import plannerReducer from '../Exercise xp.js';
+import authReducer from '../Exercise xp gold.js';
+import inventoryReducer from '../Exercise xp ninja.js';
 
 export const store = configureStore({
   reducer: {
-    todos: todosReducer,
+    planner: plannerReducer,
+    auth: authReducer,
+    inventory: inventoryReducer,
   },
 });

@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addTodo } from '../../Exercise xp.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTask } from '../../Exercise xp.js';
 
 export default function AddTodo() {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
+  const selectedDate = useSelector((state) => state.planner.selectedDate);
 
   function handleSubmit(event) {
     event.preventDefault();
     const trimmedText = text.trim();
     if (!trimmedText) return;
 
-    dispatch(addTodo(trimmedText));
+    dispatch(addTask({ date: selectedDate, text: trimmedText }));
     setText('');
   }
 
@@ -25,7 +26,7 @@ export default function AddTodo() {
         type="text"
         value={text}
         onChange={(event) => setText(event.target.value)}
-        placeholder="What needs to be done?"
+        placeholder="Add a task for this day"
         maxLength={160}
       />
       <button type="submit" aria-label="Add task">

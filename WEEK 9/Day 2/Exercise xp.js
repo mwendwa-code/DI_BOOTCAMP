@@ -1,38 +1,70 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
-const initialState = {
-  todos: [],
+const getTodayKey = () => new Date().toISOString().split('T')[0];
+
+const getInitialTasks = () => {
+  const date = getTodayKey();
+
+  return {
+    selectedDate: date,
+    tasks: {
+      [date]: [
+        { id: nanoid(), text: 'Review project brief', completed: false },
+        { id: nanoid(), text: 'Prepare for tomorrow', completed: true },
+      ],
+    },
+  };
 };
 
-const todoSlice = createSlice({
-  name: 'todos',
-  initialState,
+const plannerSlice = createSlice({
+  name: 'planner',
+  initialState: getInitialTasks(),
   reducers: {
-    addTodo: {
-      reducer(state, action) {
-        state.todos.push(action.payload);
-      },
-      prepare(text) {
-        return {
-          payload: {
-            id: nanoid(),
-            text: text.trim(),
-            completed: false,
-          },
-        };
-      },
+    setSelectedDate(state, action) {
+      state.selectedDate = action.payload;
     },
-    toggleTodo(state, action) {
-      const todo = state.todos.find((item) => item.id === action.payload);
-      if (todo) {
-        todo.completed = !todo.completed;
+    addTask(state, action) {
+      const { date, text } = action.payload;
+      const trimmedText = text.trim();
+
+      if (!trimmedText) return;
+
+      if (!state.tasks[date]) {
+        state.tasks[date] = [];
+      }
+
+      state.tasks[date].push({
+        id: nanoid(),
+        text: trimmedText,
+        completed: false,
+      });
+    },
+    editTask(state, action) {
+      const { date, id, text, completed } = action.payload;
+      const task = state.tasks[date]?.find((item) => item.id === id);
+
+      if (!task) return;
+
+      if (typeof text === 'string') {
+        const trimmedText = text.trim();
+        if (trimmedText) {
+          task.text = trimmedText;
+        }
+      }
+
+      if (typeof completed === 'boolean') {
+        task.completed = completed;
       }
     },
-    removeTodo(state, action) {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    deleteTask(state, action) {
+      const { date, id } = action.payload;
+
+      if (!state.tasks[date]) return;
+
+      state.tasks[date] = state.tasks[date].filter((task) => task.id !== id);
     },
   },
 });
 
-export const { addTodo, toggleTodo, removeTodo } = todoSlice.actions;
-export default todoSlice.reducer;
+export const { setSelectedDate, addTask, editTask, deleteTask } = plannerSlice.actions;
+export default plannerSlice.reducer;
