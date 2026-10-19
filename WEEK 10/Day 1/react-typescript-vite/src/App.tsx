@@ -3,7 +3,36 @@ import Greeting from './components/Greeting'
 import UserCard from './components/UserCard'
 import UserList from './components/UserList'
 import BookApp from './daily-challenge/BookApp'
+import DataFetcher from './components/DataFetcher'
+import {
+  fetchRecipes,
+  getRecipeSource,
+  type Recipe,
+} from '../../Exercise xp'
 import './App.css'
+
+const rapidApiKey = import.meta.env.VITE_RAPIDAPI_KEY
+const recipeSource = getRecipeSource(rapidApiKey)
+const fetchRecipeData = (signal: AbortSignal) =>
+  fetchRecipes(signal, rapidApiKey)
+
+function isRecipe(value: unknown): value is Recipe {
+  if (typeof value !== 'object' || value === null) {
+    return false
+  }
+
+  const recipe = value as Record<string, unknown>
+  return (
+    typeof recipe.id === 'string' &&
+    typeof recipe.title === 'string' &&
+    typeof recipe.image === 'string' &&
+    Array.isArray(recipe.ingredients) &&
+    recipe.ingredients.every(
+      (ingredient: unknown) => typeof ingredient === 'string',
+    ) &&
+    typeof recipe.instructions === 'string'
+  )
+}
 
 function App() {
   return (
@@ -89,6 +118,56 @@ function App() {
             </div>
           </div>
           <BookApp />
+        </article>
+
+        <article className="example-panel recipes-panel">
+          <div className="panel-heading">
+            <span className="step-number">07</span>
+            <div>
+              <p className="panel-kicker">GENERIC FETCH + REDUX</p>
+              <h2>Recipe data explorer</h2>
+            </div>
+          </div>
+          <p className="muted-copy recipe-source">
+            Data source: {recipeSource}
+          </p>
+          <DataFetcher<Recipe>
+            title="Recipes to explore"
+            fetchData={fetchRecipeData}
+            isItem={isRecipe}
+            getKey={(recipe) => recipe.id}
+            renderItem={(recipe) => (
+              <>
+                <img
+                  className="data-recipe-image"
+                  src={recipe.image}
+                  alt=""
+                  loading="lazy"
+                />
+                <div className="data-recipe-content">
+                  <h3>{recipe.title}</h3>
+                  <p className="muted-copy">
+                    {recipe.ingredients.length} ingredients
+                  </p>
+                  <details>
+                    <summary>View ingredients and instructions</summary>
+                    {recipe.ingredients.length > 0 && (
+                      <ul>
+                        {recipe.ingredients.map((ingredient) => (
+                          <li key={ingredient}>{ingredient}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {recipe.instructions ? (
+                      <p>{recipe.instructions}</p>
+                    ) : (
+                      <p>Instructions are not available from this source.</p>
+                    )}
+                  </details>
+                </div>
+              </>
+            )}
+          />
         </article>
       </section>
 
