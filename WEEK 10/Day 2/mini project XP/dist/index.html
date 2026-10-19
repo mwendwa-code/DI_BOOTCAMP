@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A personal recipe book for saving, organizing, and favoriting recipes."
+    />
+    <meta name="theme-color" content="#f5f2ec" />
+    <title>Recipe Book</title>
+    <script type="module" crossorigin src="/assets/index-C-41BuTh.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B9Ny4r8_.css">
+  </head>
+  <body>
+    <main class="recipe-app">
+      <header class="page-header">
+        <a class="brand" href="#" aria-label="Recipe Book home">
+          <span class="brand-mark" aria-hidden="true">R</span>
+          <span>Recipe Book</span>
+        </a>
+        <p class="header-note">A little collection of good things</p>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">YOUR KITCHEN, YOUR COLLECTION</p>
+        <h1 id="page-title">Recipes worth <span>keeping.</span></h1>
+        <p class="intro-copy">
+          Save the dishes you love, keep the ingredients close, and find your
+          next favorite whenever you need it.
+        </p>
+      </section>
+
+      <section class="workspace" aria-label="Manage your recipes">
+        <section class="entry-panel" aria-labelledby="form-title">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">01</span>
+            <div>
+              <p class="section-kicker">ADD TO YOUR COLLECTION</p>
+              <h2 id="form-title">New recipe</h2>
+            </div>
+          </div>
+
+          <form id="recipeEntryForm">
+            <label class="form-field" for="recipeTitle">
+              <span>Recipe title</span>
+              <input
+                type="text"
+                id="recipeTitle"
+                name="title"
+                placeholder="e.g. Sunday tomato pasta"
+                autocomplete="off"
+                maxlength="100"
+                required
+              />
+            </label>
+
+            <label class="form-field" for="ingredients">
+              <span>Ingredients <small>one per line</small></span>
+              <textarea
+                id="ingredients"
+                name="ingredients"
+                placeholder="400 g pasta&#10;2 tbsp olive oil&#10;3 ripe tomatoes"
+                rows="5"
+                required
+              ></textarea>
+            </label>
+
+            <label class="form-field" for="instructions">
+              <span>Cooking instructions</span>
+              <textarea
+                id="instructions"
+                name="instructions"
+                placeholder="Write the steps for making this recipe..."
+                rows="5"
+                required
+              ></textarea>
+            </label>
+
+            <button class="button button-primary" type="submit">
+              <span aria-hidden="true">+</span> Add recipe
+            </button>
+          </form>
+        </section>
+
+        <section class="collection-panel" aria-labelledby="collection-title">
+          <div class="collection-heading">
+            <div class="section-heading">
+              <span class="section-number section-number-soft" aria-hidden="true">02</span>
+              <div>
+                <p class="section-kicker">SAVED LOCALLY ON THIS DEVICE</p>
+                <h2 id="collection-title">Your collection</h2>
+              </div>
+            </div>
+            <button
+              id="clearRecipesButton"
+              class="button button-quiet"
+              type="button"
+            >
+              Clear all
+            </button>
+          </div>
+
+          <p id="appMessage" class="app-message" role="status" aria-live="polite"></p>
+          <div id="recipeContainer" class="recipe-grid"></div>
+        </section>
+      </section>
+
+      <footer class="page-footer">
+        <span>Made for the meals you want to make again.</span>
+        <span>Recipes stay in your browser.</span>
+      </footer>
+    </main>
+
+  </body>
+</html>
