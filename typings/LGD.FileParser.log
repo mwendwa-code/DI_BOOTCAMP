@@ -1,2 +1,7 @@
 Stop logging by changing setting "lgd.options.createDebugLog"
 If you have any problems or requests please create an issue on Github.
+
+c:\Users\EHK STUDENT 005\Desktop\DI-Bootcamp\WEEK 10\Day 3\auth.routes.js: 
+
+ERROR: Error occurred parsing value using "any" instead. err: SyntaxError: Unexpected token ':'
+ERROR: Error occurred parsing value using "any" instead. err: SyntaxError: Unexpected token ':'
