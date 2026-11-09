@@ -1,0 +1,111 @@
+.account-page {
+  min-height: calc(100vh - 146px);
+  padding: 56px 18px 70px;
+}
+
+.account-card {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 38px 42px;
+  background: #fff;
+  border: 1px solid #e8e6df;
+}
+
+.account-card > .eyebrow {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.account-card h1 {
+  margin: 0;
+  color: #293d31;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.account-intro {
+  margin: 11px 0 26px;
+  color: #71736b;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.account-card form label {
+  display: block;
+  margin-bottom: 16px;
+  color: #41443d;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.account-card input {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 12px;
+  color: #242720;
+  background: #fbfaf7;
+  border: 1px solid #dcdad2;
+  border-radius: 0;
+  font: inherit;
+}
+
+.account-card input:focus {
+  border-color: #587052;
+  outline: 2px solid rgba(88, 112, 82, 0.18);
+}
+
+.name-fields {
+  margin-right: -2%;
+  font-size: 0;
+}
+
+.name-fields label {
+  display: inline-block !important;
+  width: 48%;
+  margin-right: 2%;
+  vertical-align: top;
+  font-size: 12px !important;
+}
+
+.account-card button {
+  width: 100%;
+  margin-top: 3px;
+  padding: 13px;
+  color: #fff;
+  background: #344c3b;
+  border: 0;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 180ms ease;
+}
+
+.account-card button:hover,
+.account-card button:focus-visible {
+  background: #587052;
+}
+
+.account-switch {
+  margin: 21px 0 0;
+  color: #71736b;
+  font-size: 13px;
+  text-align: center;
+}
+
+.account-switch a {
+  color: #344c3b;
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .account-page {
+    padding: 35px 14px 48px;
+  }
+
+  .account-card {
+    padding: 30px 22px;
+  }
+}
